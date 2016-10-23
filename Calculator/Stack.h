@@ -16,11 +16,7 @@ public:
 	}
 
 	Element& topValue() {
-		return elems[0];
-	}
-
-	Element& bottomValue() {
-		return elems[curSize - 1];
+		return elems[curSize-1];
 	}
 
 	void clear() {

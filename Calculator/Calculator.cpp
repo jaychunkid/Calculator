@@ -28,18 +28,18 @@ void Calculator::counthelp(const Element &e) {
 	}
 	//e为数字
 	else if (e.getType() == NUMBER) {
-		if (AStack.bottomValue().getType() == NUMBER) {
+		if (AStack.topValue().getType() == NUMBER) {
 			cerr << "输入算式串有错，程序退出。" << endl;
 			abort();
 		}
-		else if (AStack.bottomValue().getSymbol() == '(') {
+		else if (AStack.topValue().getSymbol() == '(') {
 				AStack.push(e);
 				return;
 			}
 		else {
-			Element e1 = AStack.bottomValue();
+			Element e1 = AStack.topValue();
 			AStack.pop();
-			Element e2 = AStack.bottomValue();
+			Element e2 = AStack.topValue();
 			AStack.pop();
 			double result = e2.getNumber();
 			switch (e1.getSymbol()) {
@@ -60,14 +60,14 @@ void Calculator::counthelp(const Element &e) {
 	}
 	//e为字母
 	else {
-		if (AStack.bottomValue().getType() == SYMBOL) {
+		if (AStack.topValue().getType() == SYMBOL) {
 			cerr << "输入算式串有错，程序退出。" << endl;
 			abort();
 		}
 		else if (e.getSymbol() == ')') {
-			Element e1 = AStack.bottomValue();
+			Element e1 = AStack.topValue();
 			AStack.pop();
-			if (AStack.bottomValue().getSymbol() != '(' || !AStack.pop()) {
+			if (AStack.topValue().getSymbol() != '(' || !AStack.pop()) {
 				cerr << "输入算式串有错，程序退出。" << endl;
 				abort();
 			}
